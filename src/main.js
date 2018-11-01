@@ -3,7 +3,9 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+
 import  './images/icons/index'
+import './config/rem'
 
 Vue.config.productionTip = false
 

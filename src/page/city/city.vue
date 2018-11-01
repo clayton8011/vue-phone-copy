@@ -1,12 +1,12 @@
 <template>
     <div>
-        sss
+        city
     </div>
 </template>
 
 <script>
     export default {
-        name: "home"
+        name: "city"
     }
 </script>
 

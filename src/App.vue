@@ -12,10 +12,10 @@
 </template>
 
 <script>
-import Svg from './components/common/svg'
+import svgIcon from './components/common/svg'
 export default {
   name: 'App',
-  components:{Svg}
+  components:{svgIcon}
 }
 </script>
 
