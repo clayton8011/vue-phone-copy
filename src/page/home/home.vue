@@ -26,7 +26,7 @@
         <section class="group_city_container">
             <ul class="letter_classify">
                 <li v-for="(value,key,index) in sortgroupcity" :key="key" class="letter_classify_li">
-                    <h4 class="city_title">
+                    <h4 class="city_title">{{key}}
                         <span v-if="index == 0">（按字母排序）</span>
                     </h4>
                     <ul class="groupcity_name_container citylistul clear">
@@ -59,21 +59,22 @@
         methods:{
             reload() {
                 window.location.reload();
-            }
+            },
+            async getAllData(){
+                const guessRes = await  cityGuess();
+                console.log(guessRes)
+                this.guessCity = guessRes.name;
+                this.guessCityid = guessRes.id;
+                const hotRes = await hotcity();
+                this.hotcity=hotRes;
+                const groupRes = await groupcity();
+                this.groupcity = groupRes;
+
+            },
+
         },
         mounted(){
-            cityGuess().then(res=>{
-                this.guessCity = res.name;
-                this.guessCityid = res.id;
-            })
-
-            hotcity().then(res =>{
-                this.hotcity = res;
-            })
-            groupcity().then(res =>{
-                this.groupcity=res;
-                console.log(res);
-            })
+            this.getAllData();
         },
         computed:{
             sortgroupcity(){
@@ -85,12 +86,13 @@
                 }
                 return sortobj
             }
-        }
+        },
+
     }
 </script>
 
 <style lang="scss" scoped>
-    @import "../../style/mixin";
+    @import '../../style/mixin';
     .head_logo{
         left: 0.4rem;
         font-weight: 400;
@@ -131,45 +133,46 @@
                 fill: #999;
             }
         }
-        #hot_city_container{
-            background-color: #fff;
-            margin-bottom: 0.4rem;
+    }
+    #hot_city_container{
+        background-color: #fff;
+        margin-bottom: 0.4rem;
+    }
+    .citylistul{
+        li{
+            float: left;
+            text-align: center;
+            color: $blue;
+            border-bottom: 0.025rem solid $bc;
+            border-right: 0.025rem solid $bc;
+            @include wh(25%, 1.75rem);
+            @include font(0.6rem, 1.75rem);
         }
-        .citylistul{
-            li{
-                float: left;
-                text-align: center;
-                color: $blue;
-                border-bottom: 0.025rem solid $bc;
-                border-right: 0.025rem solid $bc;
-                @include wh(25%, 1.75rem);
-                @include font(0.6rem, 1.75rem);
-            }
-            li:nth-of-type(4n){
-                border-right: none;
-            }
+        li:nth-of-type(4n){
+            border-right: none;
         }
-        .city_title{
-            color: #666;
-            font-weight: 400;
-            text-indent: 0.45rem;
-            border-top: 2px solid $bc;
-            border-bottom: 1px solid $bc;
-            @include font(0.55rem, 1.45rem, "Helvetica Neue");
-            span{
-                @include sc(0.475rem, #999);
-            }
+    }
+    .city_title{
+        color: #666;
+        font-weight: 400;
+        text-indent: 0.45rem;
+        border-top: 2px solid $bc;
+        border-bottom: 1px solid $bc;
+        @include font(0.55rem, 1.45rem, "Helvetica Neue");
+        span{
+            @include sc(0.475rem, #999);
         }
+    }
 
-        .letter_classify_li{
-            margin-bottom: 0.4rem;
-            background-color: #fff;
-            border-bottom: 1px solid $bc;
-            .groupcity_name_container{
-                li{
-                    color: #666;
-                }
+    .letter_classify_li{
+        margin-bottom: 0.4rem;
+        background-color: #fff;
+        border-bottom: 1px solid $bc;
+        .groupcity_name_container{
+            li{
+                color: #666;
             }
         }
     }
+
 </style>
