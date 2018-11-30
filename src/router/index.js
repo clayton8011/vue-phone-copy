@@ -4,9 +4,9 @@ import App from '../App'
 
 import Home from '../page/home/home'
 import City from '../page/city/city'
-// import HelloWorld from '@/components/HelloWorld'
+import msite from '../page/msite/msite'
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [
@@ -30,11 +30,11 @@ export default new Router({
                   component: City
               },
               //所有商铺列表页
-              // {
-              //     path: '/msite',
-              //     component: msite,
-              //     meta: {keepAlive: true},
-              // },
+              {
+                  path: '/msite',
+                  component: msite,
+                  meta: {keepAlive: true},
+              },
               // //特色商铺列表页
               // {
               //     path: '/food',
