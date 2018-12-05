@@ -29,7 +29,7 @@
                     </h5>
                     <h5 class="fee_distance">
                         <p class="fee">
-                            ￥{{item.float_minimum_order_amout}}起送<span class="segmentation">/</span>{{item.piecewise_agent_fee.tips}}
+                            ¥{{item.float_minimum_order_amount}}起送<span class="segmentation"> / </span>{{item.piecewise_agent_fee.tips}}
                         </p>
                         <p class="distance_time">
                             <span v-if="Number(item.distance)">

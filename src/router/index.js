@@ -5,6 +5,9 @@ import App from '../App'
 import Home from '../page/home/home'
 import City from '../page/city/city'
 import msite from '../page/msite/msite'
+import login from '@/page/login'
+import forget from '@/page/forget'
+import food from '@/page/food'
 
 Vue.use(Router);
 
@@ -36,10 +39,10 @@ export default new Router({
                   meta: {keepAlive: true},
               },
               // //特色商铺列表页
-              // {
-              //     path: '/food',
-              //     component: food
-              // },
+              {
+                  path: '/food',
+                  component: food
+              },
               // //搜索页
               // {
               //     path: '/search/:geohash',
@@ -90,11 +93,11 @@ export default new Router({
               //         },]
               //     },]
               // },
-              // //登录注册页
-              // {
-              //     path: '/login',
-              //     component: login
-              // },
+              //登录注册页
+              {
+                  path: '/login',
+                  component: login
+              },
               // //个人信息页
               // {
               //     path: '/profile',
@@ -123,11 +126,11 @@ export default new Router({
               //             component: service,
               //         },]
               // },
-              // //修改密码页
-              // {
-              //     path: '/forget',
-              //     component: forget
-              // },
+              //修改密码页忘记密码
+              {
+                  path: '/forget',
+                  component: forget
+              },
               // //订单列表页
               // {
               //     path: '/order',
