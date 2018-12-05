@@ -53,68 +53,13 @@
                 <transition name="showlist">
                     <section v-show="sortBy == 'sort'" class="sort_detail_type">
                         <ul class="sort_list_container" @click="sortList($event)">
-                            <li class="sort_list_li">
+                            <li class="sort_list_li" v-for="item in sortListLiAr" >
                                 <svg>
-                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#default"></use>
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" :xlink:href=item.img></use>
                                 </svg>
-                                <p data="0" :class="{sort_select: sortByType == 0}">
-                                    <span>智能排序</span>
-                                    <svg v-if="sortByType == 0">
-                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#selected"></use>
-                                    </svg>
-                                </p>
-                            </li>
-                            <li class="sort_list_li">
-                                <svg>
-                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#distance"></use>
-                                </svg>
-                                <p data="5" :class="{sort_select: sortByType == 5}">
-                                    <span>距离最近</span>
-                                    <svg v-if="sortByType == 5">
-                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#selected"></use>
-                                    </svg>
-                                </p>
-                            </li>
-                            <li class="sort_list_li">
-                                <svg>
-                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#hot"></use>
-                                </svg>
-                                <p data="6" :class="{sort_select: sortByType == 6}">
-                                    <span>销量最高</span>
-                                    <svg v-if="sortByType == 6">
-                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#selected"></use>
-                                    </svg>
-                                </p>
-                            </li>
-                            <li class="sort_list_li">
-                                <svg>
-                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#price"></use>
-                                </svg>
-                                <p data="1" :class="{sort_select: sortByType == 1}">
-                                    <span>起送价最低</span>
-                                    <svg v-if="sortByType == 1">
-                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#selected"></use>
-                                    </svg>
-                                </p>
-                            </li>
-                            <li class="sort_list_li">
-                                <svg>
-                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#speed"></use>
-                                </svg>
-                                <p data="2" :class="{sort_select: sortByType == 2}">
-                                    <span>配送速度最快</span>
-                                    <svg v-if="sortByType == 2">
-                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#selected"></use>
-                                    </svg>
-                                </p>
-                            </li>
-                            <li class="sort_list_li">
-                                <svg>
-                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#rating"></use>
-                                </svg>
-                                <p data="3" :class="{sort_select: sortByType == 3}">
-                                    <span>评分最高</span>
-                                    <svg v-if="sortByType == 3">
+                                <p :data=item.data :class="{sort_select: sortByType == item.data}">
+                                    <span>{{item.text}}</span>
+                                    <svg v-if="sortByType == item.data">
                                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#selected"></use>
                                     </svg>
                                 </p>
@@ -190,14 +135,14 @@
                 restaurant_category_id:'',
                 categoryDetail:[],
                 restaurant_category_ids:'',
-                // sortListLiAr:[
-                //     {data:0,type:0,img:'default',text:'智能排序'},
-                //     {data:5,type:5,img:'distance',text:'距离最近'},
-                //     {data:6,type:6,img:'hot',text:'销量最高'},
-                //     {data:1,type:1,img:'price',text:'起送价最低'},
-                //     {data:2,type:2,img:'speed',text:'配送速度最快'},
-                //     {data:3,type:3,img:'rating',text:'评分最高'},
-                // ],
+                sortListLiAr:[
+                    {data:0,type:0,img:'#default',text:'智能排序'},
+                    {data:5,type:5,img:'#distance',text:'距离最近'},
+                    {data:6,type:6,img:'#hot',text:'销量最高'},
+                    {data:1,type:1,img:'#price',text:'起送价最低'},
+                    {data:2,type:2,img:'#speed',text:'配送速度最快'},
+                    {data:3,type:3,img:'#rating',text:'评分最高'},
+                ],
                 sortByType:'',
                 Delivery:[],
                 support_ids:[],
