@@ -8,6 +8,10 @@ import msite from '../page/msite/msite'
 import login from '@/page/login'
 import forget from '@/page/forget'
 import food from '@/page/food'
+import shop from '@/page/shop/shop'
+import foodDetail from '@/page/shop/children/foodDetail'
+import shopDetail from '@/page/shop/children/shopDetail'
+import shopSafe from '@/page/shop/children/children/shopSafe'
 
 Vue.use(Router);
 
@@ -49,21 +53,21 @@ export default new Router({
               //     component: search
               // },
               // //商铺详情页
-              // {
-              //     path: '/shop',
-              //     component: shop,
-              //     children: [{
-              //         path: 'foodDetail', //食品详情页
-              //         component: foodDetail,
-              //     }, {
-              //         path: 'shopDetail', //商铺详情页
-              //         component: shopDetail,
-              //         children: [{
-              //             path: 'shopSafe', //商铺安全认证页
-              //             component: shopSafe,
-              //         },]
-              //     }]
-              // },
+              {
+                  path: '/shop',
+                  component: shop,
+                  children: [{
+                      path: 'foodDetail', //食品详情页
+                      component: foodDetail,
+                  }, {
+                      path: 'shopDetail', //商铺详情页
+                      component: shopDetail,
+                      children: [{
+                          path: 'shopSafe', //商铺安全认证页
+                          component: shopSafe,
+                      },]
+                  }]
+              },
               // //确认订单页
               // {
               //     path: '/confirmOrder',
