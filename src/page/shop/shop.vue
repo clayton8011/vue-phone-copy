@@ -15,8 +15,8 @@
                         </section>
                         <section class="description_right">
                             <h4 class="description_title ellipsis">{{shopDetailData.name}}</h4>
-                            <p class="description_text">商家配送/{{shopDetailData.order_lead_time}}分钟送达/配送费¥{{shopDetailData.float_delivery_fee}}</p>
-                            <p class="description_promotion ellipsis">公告:{{promotionInfo}}</p>
+                            <p class="description_text">商家配送 / {{shopDetailData.order_lead_time}}分钟送达 / 配送费¥{{shopDetailData.float_delivery_fee}}</p>
+                            <p class="description_promotion ellipsis">公告：{{promotionInfo}}</p>
                         </section>
                         <svg width="14" height="14" xmlns="http://www.w3.org/2000/svg" version="1.1" class="description_arrow" >
                             <path d="M0 0 L8 7 L0 14"  stroke="#fff" stroke-width="1" fill="none"/>
@@ -140,12 +140,12 @@
                                 </svg>
                             </div>
                             <div class="cart_num">
-                                <div>¥{{totalPrice}}</div>
+                                <div>¥ {{totalPrice}}</div>
                                 <div>配送费¥{{deliveryFee}}</div>
                             </div>
                         </section>
                         <section class="gotopay" :class="{gotopay_acitvity:minimumOrderAmount <=0}">
-                            <span class="gotopay_button_style" v-if="minimumOrderAmount >0">还差¥{{minimumOrderAmount}}起送</span>
+                            <span class="gotopay_button_style" v-if="minimumOrderAmount > 0">还差¥{{minimumOrderAmount}}起送</span>
                             <router-link :to="{path:'/confirmOrder',query:{geohash,shopId}}" class="gotopay_button_style" v-else>去结算</router-link>
                         </section>
                     </section>
@@ -193,7 +193,7 @@
                 </section>
             </transition>
             <transition name="fade-choose">
-                <section class="rating_container" id="ratingContainer" v-show="changeShowtype == 'rating'">
+                <section class="rating_container" id="ratingContainer" v-show="changeShowType == 'rating'">
                     <section v-load-more="loaderMoreRating" type="2">
                     <!--<section  type="2">-->
                         <section>
@@ -267,9 +267,9 @@
                         </svg>
                     </header>
                     <section class="specs_details">
-                        <h5 class="specs_detail_title">{{choosedFoods.specifications[0].name}}</h5>
+                        <h5 class="specs_details_title">{{choosedFoods.specifications[0].name}}</h5>
                         <ul>
-                            <li v-for="(item,index) in choosedFoods.specifications[0].value" :class="{specs_activity:itemIndex == specsIndex}" @click="choosespecs(itemIndex)">
+                            <li v-for="(item,itemIndex) in choosedFoods.specifications[0].values" :class="{specs_activity:itemIndex == specsIndex}" @click="chooseSpecs(itemIndex)">
                                 {{item}}
                             </li>
                         </ul>
@@ -315,42 +315,41 @@
     export default {
         data(){
           return {
-              imgBaseUrl,
-              showActivities:false,
-              showLoading:false,
-              shopDetailData:null,
-              promotionInfo:"",
-              menuIndex:0,
-              categoryNum:[],
-              titleDetailIndex:0,
-              foods:[],
-              changeShowType:'food',
-              menuList:[],
-              totalPrice:0,
-              showCartList:false,
-              cartFoodList:[],
-              receiveInCart:false,
-              geohash:'',
-              shopId:'',
-              changeShowtype:'',
-              ratingScoresData:{
-                  compare_rating:0
-              },
-              ratingTagsList:[],
-              ratingList:[],
-              showSpecs:false,
-              showDeleteTip:false,
-              showMoveDot:null,
-              loadRatings:false,
-              ratingOffset:0,
-              ratingTageIndex:0,
-              menuIndexChange:false,
-              foodScroll:null,
-              preventRepeatRequest:false,
-              ratingTagName:'',
-              ratingScroll:null,
-              shopListTop:[],
+              geohash: '', //geohash位置信息
+              shopId: null, //商店id值
+              showLoading: true, //显示加载动画
+              changeShowType: 'food',//切换显示商品或者评价
+              shopDetailData: null, //商铺详情
+              showActivities: false, //是否显示活动详情
+              menuList: [], //食品列表
+              menuIndex: 0, //已选菜单索引值，默认为0
+              menuIndexChange: true,//解决选中index时，scroll监听事件重复判断设置index的bug
+              shopListTop: [], //商品列表的高度集合
               TitleDetailIndex: null, //点击展示列表头部详情
+              categoryNum: [], //商品类型右上角已加入购物车的数量
+              totalPrice: 0, //总共价格
+              cartFoodList: [], //购物车商品列表
+              showCartList: false,//显示购物车列表
+              receiveInCart: false, //购物车组件下落的圆点是否到达目标位置
+              ratingList: null, //评价列表
+              ratingOffset: 0, //评价获取数据offset值
+              ratingScoresData: null, //评价总体分数
+              ratingTagsList: null, //评价分类列表
+              ratingTageIndex: 0, //评价分类索引
+              preventRepeatRequest: false,// 防止多次触发数据请求
+              ratingTagName: '',//评论的类型
+              loadRatings: false, //加载更多评论是显示加载组件
+              foodScroll: null,  //食品列表scroll
+              showSpecs: false,//控制显示食品规格
+              specsIndex: 0, //当前选中的规格索引值
+              choosedFoods: null, //当前选中视频数据
+              showDeleteTip: false, //多规格商品点击减按钮，弹出提示框
+              showMoveDot: [], //控制下落的小圆点显示隐藏
+              windowHeight: null, //屏幕的高度
+              elLeft: 0, //当前点击加按钮在网页中的绝对top值
+              elBottom: 0, //当前点击加按钮在网页中的绝对left值
+              ratingScroll: null, //评论页Scroll
+              imgBaseUrl,
           }
         },
        components:{
@@ -369,8 +368,8 @@
         },
         computed:{
             ...mapState(['latitude','longitude','cartList']),
-            promotionsInfo(){
-              return this.shopDetialData.promotionInfo || '欢迎光临，用餐高峰期请提前下单，谢谢。'
+            promotionInfo(){
+              return this.shopDetailData.promotion_info || '欢迎光临，用餐高峰期请提前下单，谢谢。'
             },
             deliveryFee(){
               if(this.shopDetailData){
@@ -380,8 +379,8 @@
               }
             },
             minimumOrderAmount(){
-                if(this.shopDetialData){
-                    return this.shopDetialData.float_minimum_order_amount - this.totalPrice;
+                if(this.shopDetailData){
+                    return this.shopDetailData.float_minimum_order_amount - this.totalPrice;
                 }else {
                     return null;
                 }
@@ -439,7 +438,7 @@
                 })
             },
             showTitleDetail(index){
-                this.TitleDetailIndex =this.TitleDetailIndex ?null:index;
+                this.TitleDetailIndex = this.TitleDetailIndex ==index ?null:index;
             },
             toggleCartList(){
                 this.cartFoodList.length ? this.showCartList = !this.showCartList : true;
@@ -589,6 +588,13 @@
                 })
                 this.totalPrice = this.totalPrice.toFixed(2);
                 this.categoryNum = [...newArr];
+            },
+            chooseSpecs(index){
+                this.specsIndex = index;
+            },
+            addSpecs(category_id, item_id, food_id, name, price, specs, packing_fee, sku_id, stock){
+                this.ADD_CART({shopid: this.shopId, category_id, item_id, food_id, name, price, specs, packing_fee, sku_id, stock});
+                this.showChooseList();
             },
 
 
