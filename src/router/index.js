@@ -12,7 +12,10 @@ import shop from '@/page/shop/shop'
 import foodDetail from '@/page/shop/children/foodDetail'
 import shopDetail from '@/page/shop/children/shopDetail'
 import shopSafe from '@/page/shop/children/children/shopSafe'
-
+import confirmOrder from '@/page/confirmOrder/confirmOrder'
+import chooseAddress from '@/page/confirmOrder/children/chooseAddress'
+import addAddress from '@/page/confirmOrder/children/children/addaddress'
+import searchAddress from '@/page/confirmOrder/children/children/searchAddress'
 Vue.use(Router);
 
 export default new Router({
@@ -69,10 +72,11 @@ export default new Router({
                   }]
               },
               // //确认订单页
-              // {
-              //     path: '/confirmOrder',
-              //     component: confirmOrder,
-              //     children: [{
+              {
+                  path: '/confirmOrder',
+                  component: confirmOrder,
+                  children: [
+                      // {
               //         path: 'remark', //订单备注
               //         component: remark,
               //     }, {
@@ -84,19 +88,20 @@ export default new Router({
               //     }, {
               //         path: 'userValidation', //用户验证
               //         component: userValidation,
-              //     }, {
-              //         path: 'chooseAddress', //选择地址
-              //         component: chooseAddress,
-              //         children: [{
-              //             path: 'addAddress', //添加地址
-              //             component: addAddress,
-              //             children: [{
-              //                 path: 'searchAddress', //搜索地址
-              //                 component: searchAddress,
-              //             }]
-              //         },]
-              //     },]
-              // },
+              //     },
+                      {
+                      path: 'chooseAddress', //选择地址
+                      component: chooseAddress,
+                      children: [{
+                          path: 'addAddress', //添加地址
+                          component: addAddress,
+                          children: [{
+                              path: 'searchAddress', //搜索地址
+                              component: searchAddress,
+                          }]
+                      },]
+                  },]
+              },
               //登录注册页
               {
                   path: '/login',
