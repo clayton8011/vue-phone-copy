@@ -72,9 +72,6 @@
                 id:null,
                 sig:null,
                 alertText:'',
-
-
-
             }
         },
         components:{

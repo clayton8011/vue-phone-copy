@@ -32,6 +32,9 @@ module.exports = merge(baseWebpackConfig, {
             template: 'index.html',
             favicon: 'favicon.ico',
             inject: true
-        })
+        }),
+        // new webpack.optimize.CommonsChunkPlugin({//合并相同内容
+        //     name:'vendor'
+        // }),
     ]
 })
