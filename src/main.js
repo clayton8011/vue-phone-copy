@@ -3,48 +3,9 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import Vuex from'vuex'
-import mutations from'./store/mutations'
-import actions from './store/action'
-import getters from './store/getters'
-Vue.use(Vuex);
-
-const state ={
-  latitude:'',
-  longitude:'',
-  cartList:{},
-    shopDetail:null,
-    userInfo:null,
-    shopid:null,
-    remarkText:null,
-    inputText:null,
-    invoice:false,
-    newAddress:[],
-    geohash:'31.22299.121.36025',
-    choosedAddress:null,
-    addressIndex:null,
-    needValidation:null,
-    cartId:null,
-    sig:null,
-    orderParam:null,
-    orderMessage:null,
-    orderdetail:null,
-    login:true,
-    imgPath:null,
-    removeAddress:[],
-    addAddress:'',
-    question:null,
-    cartPrice:null,
+import store from './store/index'
 
 
-
-};
-const store=new Vuex.Store({
-    state,
-    getters,
-    actions,
-    mutations,
-});
 import  './images/icons/index'
 import './config/rem'
 

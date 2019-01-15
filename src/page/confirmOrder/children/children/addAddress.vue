@@ -86,8 +86,11 @@
         },
         computed: {
             ...mapState([
-                'searchAddress', 'geohash', 'userInfo',
+                'searchAddress', 'geohash', 'userInfo','inputText'
             ]),
+        },
+        mounted(){
+            console.log(this.searchAddress)
         },
         methods: {
             ...mapMutations([
