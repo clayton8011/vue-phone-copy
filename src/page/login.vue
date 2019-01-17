@@ -18,8 +18,8 @@
                 <input type="text" placeholder="账号" v-model.lazy="userAccount">
             </section>
             <section class="input_container">
-                <input type="text" placeholder="密码" v-if="!showPassword" v-model="passWord">
-                <input type="password" v-else placeholder="密码" v-model="passWord">
+                <input type="password" placeholder="密码" v-if="!showPassword" v-model="passWord">
+                <input type="text" v-else placeholder="密码" v-model="passWord">
                 <div class="button_switch" :class="{change_to_text:showPassword}">
                     <div class="circle_button" :class="{trans_to_right:showPassword}" @click="changePassWordType"></div>
                     <span>abc</span>
@@ -140,7 +140,7 @@
                     }
                     this.userInfo = await sendLogin(this.mobileCode,this.phoneNumber,this.validate_token)
                 }else{
-                    if(this.userAccount){
+                    if(!this.userAccount){
                         this.showAlert=true;
                         this.alertText="请输入手机号";
                         return;
@@ -148,21 +148,21 @@
                         this.showAlert=true;
                         this.alertText="请输入密码";
                         return;
-                    }else if(!codeNumber){
+                    }else if(!this.codeNumber){
                         this.showAlert=true;
                         this.alertText="请输入验证码";
                         return;
                     }
-                    this.userInfo= await accountLogin(this.userAccount,this.password,this.codeNumber)
+                    this.userInfo = await accountLogin(this.userAccount,this.passWord,this.codeNumber);
                 }
-                if(!this.userInfo.userId){
-                    this.showAlert=true;
-                    this.alertText=this.userInfo.message;
-                    if(!this.loginWay) this.getCaptchaCode();
-                }
-                else{
+                if (!this.userInfo.user_id) {
+                    this.showAlert = true;
+                    this.alertText = this.userInfo.message;
+                    if (!this.loginWay) this.getCaptchaCode();
+                }else{
                     this.RECORD_USERINFO(this.userInfo);
                     this.$router.go(-1);
+
                 }
             },
             closeTip(){
