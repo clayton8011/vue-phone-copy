@@ -16,6 +16,16 @@ import confirmOrder from '@/page/confirmOrder/confirmOrder'
 import chooseAddress from '@/page/confirmOrder/children/chooseAddress'
 import addAddress from '@/page/confirmOrder/children/children/addaddress'
 import searchAddress from '@/page/confirmOrder/children/children/searchAddress'
+import payment from '@/page/confirmOrder/children/children/payment'
+import profile from '@/page/profile/profile'
+import info from '@/page/profile/children/info'
+import setusername from '@/page/profile/children/setusername'
+import address from '@/page/profile/children/address'
+import add from '@/page/profile/children/add'
+import addDetail from '@/page/profile/children/addDetail'
+import service from '@/page/service/service'
+import order from '@/page/order/order'
+import orderDetail from '@/page/order/children/orderDetail'
 Vue.use(Router);
 
 export default new Router({
@@ -34,7 +44,6 @@ export default new Router({
                   path: '/home',
                   component: Home
               },
-              //当前选择城市页
               {
                   path: '/city/:cityid',
                   component: City
@@ -82,10 +91,12 @@ export default new Router({
               //     }, {
               //         path: 'invoice', //发票抬头
               //         component: invoice,
-              //     }, {
-              //         path: 'payment', //付款页面
-              //         component: payment,
-              //     }, {
+              //     },
+                      {
+                      path: 'payment', //付款页面
+                      component: payment,
+                  },
+                      // {
               //         path: 'userValidation', //用户验证
               //         component: userValidation,
               //     },
@@ -108,47 +119,47 @@ export default new Router({
                   component: login
               },
               // //个人信息页
-              // {
-              //     path: '/profile',
-              //     component: profile,
-              //     children: [{
-              //         path: 'info', //个人信息详情页
-              //         component: info,
-              //         children: [{
-              //             path: 'setusername',
-              //             component: setusername,
-              //         }, {
-              //             path: 'address',
-              //             component: address,     //编辑地址
-              //             children: [{
-              //                 path: 'add',
-              //                 component: add,
-              //                 children: [{
-              //                     path: 'addDetail',
-              //                     component: addDetail
-              //                 }]
-              //             }]
-              //         }]
-              //     },
-              //         {
-              //             path: 'service', //服务中心
-              //             component: service,
-              //         },]
-              // },
+              {
+                  path: '/profile',
+                  component: profile,
+                  children: [{
+                      path: 'info', //个人信息详情页
+                      component: info,
+                      children: [{
+                          path: 'setusername',
+                          component: setusername,
+                      }, {
+                          path: 'address',
+                          component: address,     //编辑地址
+                          children: [{
+                              path: 'add',
+                              component: add,
+                              children: [{
+                                  path: 'addDetail',
+                                  component: addDetail
+                              }]
+                          }]
+                      }]
+                  },
+                      {
+                          path: 'service', //服务中心
+                          component: service,
+                      },]
+              },
               //修改密码页忘记密码
               {
                   path: '/forget',
                   component: forget
               },
               // //订单列表页
-              // {
-              //     path: '/order',
-              //     component: order,
-              //     children: [{
-              //         path: 'orderDetail', //订单详情页
-              //         component: orderDetail,
-              //     },]
-              // },
+              {
+                  path: '/order',
+                  component: order,
+                  children: [{
+                      path: 'orderDetail', //订单详情页
+                      component:orderDetail,
+                  },]
+              },
               // //vip卡页
               // {
               //     path: '/vipcard',

@@ -11,11 +11,20 @@ import './config/rem'
 
 Vue.config.productionTip = false
 
+// if (process.env.NODE_ENV == 'development') {
+//     Vue.config.devtools = true;
+// } else {
+//     Vue.config.devtools = false;
+// }
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   store,
   components: { App },
-  template: '<App/>'
+  template: ''
 });
+// new Vue({
+//     router,
+//     store,
+// }).$mount('#app')

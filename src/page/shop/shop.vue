@@ -287,7 +287,7 @@
         <transition name="fade">
             <p class="show_delete_tip" v-if="showDeleteTip">多规格商品只能去购物车删除哦</p>
         </transition>
-        <transition appear @fater-appear='afterEnter' @before-appear="beforeenter" v-for="(item,index) in showMoveDot">
+        <transition appear @after-appear='afterEnter' @before-appear="beforeenter" v-for="(item,index) in showMoveDot">
             <span class="move_dot" v-if="item">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-add"></use>
             </span>
@@ -425,6 +425,25 @@
             },
             goback(){
                 this.$route.go(-1);
+            },
+            beforeEnter(el){
+                el.style.transform = `translate3d(0,${37 + this.elBottom - this.windowHeight}px,0)`;
+                el.children[0].style.transform = `translate3d(${this.elLeft - 30}px,0,0)`;
+                el.children[0].style.opacity = 0;
+            },
+            afterEnter(el){
+                el.style.transform = `translate3d(0,0,0)`;
+                el.children[0].style.transform = `translate3d(0,0,0)`;
+                el.style.transition = 'transform .55s cubic-bezier(0.3, -0.25, 0.7, -0.15)';
+                el.children[0].style.transition = 'transform .55s linear';
+                this.showMoveDot = this.showMoveDot.map(item => false);
+                el.children[0].style.opacity = 1;
+                el.children[0].addEventListener('transitionend', () => {
+                    this.listenInCart();
+                })
+                el.children[0].addEventListener('webkitAnimationEnd', () => {
+                    this.listenInCart();
+                })
             },
             showActivitiesFun(){
                 this.showActivities=!this.showActivities;

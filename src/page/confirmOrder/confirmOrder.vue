@@ -16,7 +16,7 @@
                             <span>{{choosedAddress.phone}}</span>
                         </header>
                         <div class="address_detail">
-                            <spna v-if="choosedAddress.tag" :style="{backgroundColor:iconColor(choosedAddress.tag)}">{{choosedAddress.tag}}</spna>
+                            <span v-if="choosedAddress.tag" :style="{backgroundColor:iconColor(choosedAddress.tag)}">{{choosedAddress.tag}}</span>
                             <p>{{choosedAddress.address_detail}}</p>
                         </div>
                     </div>
@@ -186,7 +186,7 @@
                 if(this.inputText){
                     return str +=this.inputText;
                 }else{
-                    return str.substr(0,str.lastINdexOf('，'));
+                    return str.substr(0,str.lastIndexOf('，'));
                 }
             }
         },
@@ -207,7 +207,7 @@
                             newArr.push({
                                 attrs: [],
                                 extra: {},
-                                id: item.id,
+                                // id: item.id,
                                 name: item.name,
                                 packing_fee: item.packing_fee,
                                 price: item.price,
@@ -220,7 +220,7 @@
                     })
                 });
                 this.checkoutData=await checkout(this.geohash,[newArr],this.shopId);
-                this.SAVE_CART_ID_SIG({cart_id:this.checkoutData.cart.id,sig:this.checkoutData.sig});
+                // this.SAVE_CART_ID_SIG({cart_id:this.checkoutData.cart.id,sig:this.checkoutData.sig});
                 this.showLoading=false;
                 this.initAddress();
             },

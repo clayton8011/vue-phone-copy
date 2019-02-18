@@ -125,16 +125,19 @@
                 }else if(this.tag == '公司'){
                     this.tag_type = 4;
                 }
-                // let res = await postAddAddress(this.userInfo.user_id, this.searchAddress.name, this.address_detail, this.geohash, this.name, this.phone, this.anntherPhoneNumber, 0, this.sex, this.tag, this.tag_type);
-                // //保存成功返沪上一页，否则弹出提示框
-                // if (res.message) {
-                //     this.showAlert = true;
-                //     this.alertText = res.message;
-                // }else {
-                //     this.CONFIRM_ADDRESS(1);
-                //     this.$router.go(-1);
-                // }
+                let res = await postAddAddress(this.userInfo.user_id, this.searchAddress.name, this.address_detail, this.geohash, this.name, this.phone, this.anntherPhoneNumber, 0, this.sex, this.tag, this.tag_type);
+                //保存成功返沪上一页，否则弹出提示框
+                if (res.message) {
+                    this.showAlert = true;
+                    this.alertText = res.message;
+                }else {
+                    this.CONFIRM_ADDRESS(1);
+                    this.$router.go(-1);
+                }
             },
+            closeTip(){
+                this.showAlert=false;
+            }
         }
     }
 </script>

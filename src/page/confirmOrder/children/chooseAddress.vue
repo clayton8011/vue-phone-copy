@@ -15,7 +15,7 @@
                         <div>
                             <header>
                                 <span>{{item.name}}</span>
-                                <span>{{item.sex == 1?'先生':'女士'}}</span>
+                                <span>{{item.sex == 1? '先生' : '女士'}}</span>
                                 <span>{{item.phone}}</span>
                             </header>
                             <div class="addredss_detail ellipsis">
@@ -114,8 +114,8 @@
                     })
                 }
             },
-            chooseAddress(item,index){
-                this.CHOOSE_ADDRESS({item,index});
+            chooseAddress(address,index){
+                this.CHOOSE_ADDRESS({address,index});
                 this.$router.go(-1);
             },
             iconColor(tag){

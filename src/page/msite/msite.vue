@@ -42,7 +42,7 @@
 <script>
     import {mapMutations} from 'vuex'
     import headTop from '@/components/header/head'
-    import footGuide from '@/components/footer/footguide'
+    import footGuide from '@/components/footer/footGuide'
     import shopList from '@/components/common/shopList'
     import '../../plugins/swiper/swiper.min.css'
     import '../../plugins/swiper/swiper.min.js'
