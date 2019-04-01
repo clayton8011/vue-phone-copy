@@ -24,6 +24,7 @@ import address from '@/page/profile/children/address'
 import add from '@/page/profile/children/add'
 import addDetail from '@/page/profile/children/addDetail'
 import service from '@/page/service/service'
+import questionDetail from '@/page/service/children/questionDetail'
 import order from '@/page/order/order'
 import orderDetail from '@/page/order/children/orderDetail'
 Vue.use(Router);
@@ -186,14 +187,14 @@ export default new Router({
               //     component: download
               // },
               // //服务中心
-              // {
-              //     path: '/service',
-              //     component: service,
-              //     children: [{
-              //         path: 'questionDetail', //订单详情页
-              //         component: questionDetail,
-              //     },]
-              // },
+              {
+                  path: '/service',
+                  component: service,
+                  children: [{
+                      path: 'questionDetail', //订单详情页
+                      component: questionDetail,
+                  },]
+              },
               // //余额
               // {
               //     path: 'balance',
